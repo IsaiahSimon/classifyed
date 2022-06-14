@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
-  secret: 'keyboard cat',
+  secret: `${process.env.SESSION_SECRET}`,
   resave: false,
   saveUninitialized: false,
 }));
@@ -179,7 +179,10 @@ app.post('/login', (req, res) => {
   });
 });
 
+// Listen for requests
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
 
-app.listen(3000, () => {
-  console.log(`The server is running on port 3000! Betta Go Catch It!`);
-});
+app.listen(port, () => console.log(`Server started on port ${port}.`));
