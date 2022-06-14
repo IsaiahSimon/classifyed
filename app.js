@@ -25,7 +25,7 @@ app.use(passport.authenticate('session'));
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect('mongodb://localhost:27017/userDB');
+mongoose.connect(`${process.env.DB_STRING}`);
 
 const userSchema = new mongoose.Schema ({
   email: String,
@@ -181,5 +181,5 @@ app.post('/login', (req, res) => {
 
 
 app.listen(3000, () => {
-  console.log(`The server started on port 3000! Betta Go Catch It!`);
+  console.log(`The server is running on port 3000! Betta Go Catch It!`);
 });
